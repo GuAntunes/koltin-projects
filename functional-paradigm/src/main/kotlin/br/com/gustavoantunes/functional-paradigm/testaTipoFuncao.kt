@@ -44,3 +44,57 @@ class Teste: () -> Unit {
         println("Executando invoke do Teste")
     }
 }
+
+
+private fun testaTipoFuncaoReferenciaComRetorno() {
+    val minhaFuncao: (Int, Int) -> Int = ::soma
+    println(minhaFuncao(1, 2))
+}
+
+fun soma(a: Int, b: Int): Int{
+    return a + b
+}
+
+private fun testaTipoFuncaoClasseComRetorno() {
+    //Exemplo de utilização de classe como tipo função
+    val minhaFuncaoClasse: (Int, Int) -> Int = Soma()
+    println(minhaFuncaoClasse(10,5))
+}
+
+class Soma: (Int, Int) -> Int {
+    override fun invoke(p1: Int, b: Int): Int {
+        return p1 + b
+    }
+}
+
+private fun testaTipoFuncaoComFuncaoAnonimaComParametrosERetorno() {
+    val minhaFuncaoAnonima: (Int, Int) -> Int = fun(a, b): Int {
+        return a + b
+    }
+    //ou
+    val minhaFuncaoAnonimaSimplificada = fun(a: Int, b: Int): Int {
+        return a + b
+    }
+    println(minhaFuncaoAnonima(40, 50))
+}
+
+private fun testaTipoFuncaoLambdaComParametrosERetorno() {
+    val minhaFuncaoLambda: (Int, Int) -> Int = { a, b ->
+        a + b
+    }
+    //ou
+    val minhaFuncaoLambdaSimplificada = { a: Int, b: Int ->
+        a + b
+    }
+    println(minhaFuncaoLambda(20, 30))
+}
+
+private fun testaLambdaComMultiplosRetornos() {
+    val calculaBonificacao: (salario: Double) -> Double = lambda@{ salario ->
+        if (salario > 1000.0) {
+            return@lambda salario + 50
+        }
+        salario + 100.0
+    }
+    println(calculaBonificacao(10000.0))
+}
